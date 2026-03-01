@@ -1,5 +1,6 @@
 package org.example
 
+import ApiClient
 import com.google.gson.Gson
 
 fun main() {
@@ -8,21 +9,17 @@ fun main() {
 
     do{
         print("Inserisci il nome del pokemon da cercare: ")
-        nomePokemon = readln()
+        nomePokemon = readln().lowercase()
 
-        val jsonString = """{"id": 1, "name": "ditto", "height": "1", "weight": "20", "types": [
-    {
-      "slot": 1,
-      "type": {
-        "name": "normal",
-        "url": "https://pokeapi.co/api/v2/type/1/"
-      }
-    }
-  ]}"""
-        //Parsing
-        val pokemon = Gson().fromJson(jsonString, Pokemon::class.java)
-        println(pokemon.toString())
+        //Chiamata Api + parse
+        val pokemon = ApiClient().sendRequest(nomePokemon)
 
+        if (pokemon != null) {
+            println(pokemon)
+
+
+        } else
+            println("Pokémon non trovato")
 
         print("\nContinuare  (Y/y): ")
         val strContinuare = readln()
