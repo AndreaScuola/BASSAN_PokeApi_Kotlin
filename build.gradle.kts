@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.3.0"
-    kotlin("kapt") version "2.3.0"
+    kotlin("jvm") version "1.9.23"
+    kotlin("kapt") version "1.9.23"
 }
 
 group = "org.example"
@@ -25,6 +25,9 @@ dependencies {
 
     // Coroutines (molto consigliato con Retrofit)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+
+    // Xerial --> DB
+    implementation("org.xerial:sqlite-jdbc:3.42.0.0") // driver SQLite
 
     // Test
     testImplementation(kotlin("test"))

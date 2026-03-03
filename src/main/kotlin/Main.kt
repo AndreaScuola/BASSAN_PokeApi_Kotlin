@@ -1,25 +1,34 @@
 package org.example
 
 import ApiClient
-import com.google.gson.Gson
 
 fun main() {
     var nomePokemon = ""
     var continuare = true
+    val db = Database.getInstance()
 
     do{
         print("Inserisci il nome del pokemon da cercare: ")
         nomePokemon = readln().lowercase()
 
-        //Chiamata Api + parse
-        val pokemon = ApiClient().sendRequest(nomePokemon)
+        //Cerca nel db il pokemon
+        val dbResponse = db.getPokemon(nomePokemon)
 
-        if (pokemon != null) {
-            println(pokemon)
+        if(dbResponse == null){
+            //Chiamata Api + parse
+            val pokemon = ApiClient().sendRequest(nomePokemon)
 
+            if (pokemon != null) {
+                println(pokemon)
 
-        } else
-            println("Pokémon non trovato")
+                //Aggiunge il pokemon al DB locale
+                db.insertPokemon(pokemon)
+            } else
+                println("Pokémon non trovato")
+        } else {
+            //Pokemon presente nel DB locale
+            println(dbResponse)
+        }
 
         print("\nContinuare  (Y/y): ")
         val strContinuare = readln()
