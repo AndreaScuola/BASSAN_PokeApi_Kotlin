@@ -25,9 +25,9 @@ class Database private constructor() {
         private var instance: Database? = null
 
         fun getInstance(): Database {
-            if (instance == null) {
+            if (instance == null)
                 instance = Database()
-            }
+
             return instance!!
         }
     }
