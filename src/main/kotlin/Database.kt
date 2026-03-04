@@ -7,7 +7,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-class Database private constructor() {
+object Database {
 
     private var connection: Connection? = null
 
@@ -18,17 +18,6 @@ class Database private constructor() {
             println("Connesso al db locale")
         } catch (e: SQLException) {
             System.err.println("Errore connessione: ${e.message}")
-        }
-    }
-
-    companion object {
-        private var instance: Database? = null
-
-        fun getInstance(): Database {
-            if (instance == null)
-                instance = Database()
-
-            return instance!!
         }
     }
 

@@ -5,14 +5,13 @@ import ApiClient
 fun main() {
     var nomePokemon = ""
     var continuare = true
-    val db = Database.getInstance()
 
     do{
         print("Inserisci il nome del pokemon da cercare: ")
         nomePokemon = readln().lowercase()
 
         //Cerca nel db il pokemon
-        val dbResponse = db.getPokemon(nomePokemon)
+        val dbResponse = Database.getPokemon(nomePokemon)
 
         if(dbResponse == null){
             //Chiamata Api + parse
@@ -22,7 +21,7 @@ fun main() {
                 println(pokemon)
 
                 //Aggiunge il pokemon al DB locale
-                db.insertPokemon(pokemon)
+                Database.insertPokemon(pokemon)
             } else
                 println("Pokémon non trovato")
         } else {
